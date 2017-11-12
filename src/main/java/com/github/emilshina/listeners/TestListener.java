@@ -13,8 +13,8 @@ public class TestListener implements IInvokedMethodListener {
 
     @Override
     public void beforeInvocation(final IInvokedMethod method, final ITestResult testResult) {
-        if (method.isTestMethod() && log.isInfoEnabled()) {
-            log.info("METHOD NAME: " + method.getTestMethod().getMethodName());
+        if (method.isTestMethod()) {
+            log.info("METHOD NAME: {} ", method.getTestMethod().getMethodName());
         }
     }
 

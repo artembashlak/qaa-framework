@@ -22,9 +22,8 @@ public class DataSuppliers {
         final String dataSource = ofNullable(method.getDeclaredAnnotation(Data.class))
                 .map(Data::source)
                 .orElse("dummy.json");
-        if (log.isInfoEnabled()) {
-            log.info("DATA SOURCE: " + dataSource);
-        }
+        log.info("DATA SOURCE: {}", dataSource);
+
         return StreamEx.of(
                 new User(380507654321L, "pswd1", "username1"),
                 new User(380667654321L, "pswd2", "username2"),

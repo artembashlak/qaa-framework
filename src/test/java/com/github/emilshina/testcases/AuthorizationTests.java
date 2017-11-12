@@ -20,9 +20,8 @@ public class AuthorizationTests extends BaseClass {
     @BeforeMethod
     public void beforeEachMethod(final ITestContext context, final Method method) {
         final String browser = context.getCurrentXmlTest().getParameter("browser");
-        if (log.isInfoEnabled()) {
-            log.info("Before method of Auth class in browser " + browser + method.getName());
-        }
+        log.info("Before method of Auth class in browser {} {}", browser, method.getName());
+
     }
 
     @AfterMethod
@@ -32,9 +31,7 @@ public class AuthorizationTests extends BaseClass {
 
     @Test(dataProvider = "userCredentials", dataProviderClass = DataSuppliers.class)
     public void userShouldBeAuthorizedWithValidCredentials(final HashMap.SimpleEntry credentials) {
-        if (log.isInfoEnabled()) {
-            log.info("com.github.emilshina.model.User was authorized successfully. With " + credentials);
-        }
+        log.info("com.github.emilshina.model.User was authorized successfully. With {} ", credentials);
     }
 
     @Data(source = "data.json")
@@ -42,16 +39,13 @@ public class AuthorizationTests extends BaseClass {
     public void userShouldNotBeAuthorizedWithInvalidLogin(final User user) {
         final SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(user.getUserName()).as("Username verification.").isEqualTo("username1");
-        if (log.isInfoEnabled()) {
-            log.info("Invalid credentials for: " + user.getUserName() + ".");
-        }
+        log.info("Invalid credentials for: {}.", user.getUserName());
         softAssertions.assertAll();
     }
 
     @Test(dataProvider = "invalidPassword", dataProviderClass = DataSuppliers.class)
     public void userShouldNotBeAuthorizedWithInvalidPassword(final String password) {
-        if (log.isInfoEnabled()) {
-            log.info("Invalid credentials. Try again. " + password);
-        }
+        log.info("Invalid credentials. Try again. Password {}.", password);
+
     }
 }
