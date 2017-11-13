@@ -4,6 +4,8 @@ import com.github.emilshina.model.User;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.util.Objects;
 
+import java.util.List;
+
 /**
  * Custom asserts for testing User entity.
  */
@@ -22,6 +24,28 @@ public class UserAssert extends AbstractAssert<UserAssert, User> {
 
         if (!Objects.areEqual(name, username)) {
             failWithMessage(ERROR_MESSAGE_TEMPLATE, "Username", actual, username, name);
+        }
+        return this;
+    }
+
+    public UserAssert hasPassword(final String password) {
+        isNotNull();
+
+        final String pass = actual.getPassword();
+
+        if (!Objects.areEqual(pass, password)) {
+            failWithMessage(ERROR_MESSAGE_TEMPLATE, "Password", actual, password, pass);
+        }
+        return this;
+    }
+
+    public UserAssert hasEmails(final List<String> expectedEmails) {
+        isNotNull();
+
+        final List<String> actualEmails = actual.getEmails();
+
+        if (!Objects.areEqual(actualEmails, expectedEmails)) {
+            failWithMessage(ERROR_MESSAGE_TEMPLATE, "Emails", actual, expectedEmails, actualEmails);
         }
         return this;
     }
